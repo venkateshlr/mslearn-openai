@@ -49,10 +49,15 @@ async def main():
 
 async def call_openai_model(system_message, user_message, model, client):
     # Format and send the request to the model
+    print("\nAdding grounding context from grounding.txt")
+    grounding_text = open(file="grounding.txt", encoding="utf8").read().strip()
+    user_message = grounding_text + user_message
     messages =[
     {"role": "system", "content": system_message},
     {"role": "user", "content": user_message},
     ]
+   
+    
 
     print("\nSending request to Azure OpenAI model...\n")
 
